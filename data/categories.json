@@ -1,0 +1,581 @@
+<<<<<<< HEAD
+{
+  "version": "1.0",
+  "description": "CPD Business Directory - Category to Business Type Reference Table",
+  "lastUpdated": "2026-05-17",
+  "categories": [
+    {
+      "category": "Agriculture and Environmental",
+      "businessTypes": [
+        "General Environmental",
+        "Landscaping",
+        "Nursery/Garden Center",
+        "Pest Control",
+        "Recycling",
+        "Tree Service",
+        "Waste Services"
+      ]
+    },
+    {
+      "category": "Arts, Entertainment, and Recreation",
+      "businessTypes": [
+        "Arcade/Gaming",
+        "Bowling Alley",
+        "Event Venue",
+        "Gallery",
+        "General Entertainment",
+        "Gym/Fitness Center",
+        "Park/Recreation Center",
+        "Sports Facility",
+        "Theater/Cinema"
+      ]
+    },
+    {
+      "category": "Automotive",
+      "businessTypes": [
+        "Auto Dealer",
+        "Auto Parts",
+        "Auto Repair/Mechanic",
+        "Body Shop/Collision",
+        "Car Wash",
+        "Gas Station",
+        "General Automotive",
+        "Oil Change/Quick Lube",
+        "Tire Shop",
+        "Towing Service"
+      ]
+    },
+    {
+      "category": "Beauty and Personal Care",
+      "businessTypes": [
+        "Barbershop",
+        "General Beauty Services",
+        "Hair Salon",
+        "Nail Salon",
+        "Spa/Massage",
+        "Tanning Salon",
+        "Tattoo/Piercing"
+      ]
+    },
+    {
+      "category": "Construction and Trades",
+      "businessTypes": [
+        "Carpenter/Woodwork",
+        "Electrician",
+        "Excavation",
+        "General Construction/Trades",
+        "General Contractor",
+        "Handyman",
+        "HVAC",
+        "Masonry",
+        "Painter",
+        "Paving/Concrete",
+        "Plumber",
+        "Roofing"
+      ]
+    },
+    {
+      "category": "Education and Child Services",
+      "businessTypes": [
+        "After-School Program",
+        "Dance/Music School",
+        "Daycare/Childcare",
+        "General Education",
+        "School",
+        "Training Center",
+        "Tutoring Center"
+      ]
+    },
+    {
+      "category": "Financial Services",
+      "businessTypes": [
+        "Bank",
+        "Check Cashing",
+        "Credit Union",
+        "Financial Advisor",
+        "General Financial Services",
+        "Insurance Agency",
+        "Mortgage/Lending",
+        "Tax Preparation"
+      ]
+    },
+    {
+      "category": "Food and Beverage",
+      "businessTypes": [
+        "Bakery",
+        "Banquet Hall",
+        "Bar/Tavern",
+        "Brewery/Distillery",
+        "Café/Coffee Shop",
+        "Caterer",
+        "Deli/Sub Shop",
+        "Fast Food",
+        "Food Truck",
+        "General Food Service",
+        "Ice Cream/Frozen Treats",
+        "Pizza Shop",
+        "Restaurant"
+      ]
+    },
+    {
+      "category": "Health and Medical",
+      "businessTypes": [
+        "Chiropractor",
+        "Clinic/Urgent Care",
+        "Dentist",
+        "General Medical",
+        "Home Health Agency",
+        "Hospital",
+        "Laboratory",
+        "Medical Equipment/Supply",
+        "Mental Health/Counseling",
+        "Optometrist/Vision",
+        "Pharmacy",
+        "Physical Therapy",
+        "Physician/Doctor"
+      ]
+    },
+    {
+      "category": "Lodging and Travel",
+      "businessTypes": [
+        "General Lodging",
+        "Hotel",
+        "Inn/Bed & Breakfast",
+        "Motel",
+        "Short-Term Rental",
+        "Travel Agency"
+      ]
+    },
+    {
+      "category": "Manufacturing and Industrial",
+      "businessTypes": [
+        "Fabricator/Welder",
+        "General Manufacturing",
+        "Industrial Supplier",
+        "Machine Shop",
+        "Printer/Print Shop",
+        "Warehouse/Storage",
+        "Wholesaler/Distributor"
+      ]
+    },
+    {
+      "category": "Other Services",
+      "businessTypes": [
+        "Cleaning Service",
+        "Funeral Home",
+        "Laundromat/Dry Cleaner",
+        "Locksmith",
+        "Other",
+        "Repair Service",
+        "Storage Facility",
+        "Tailor/Alterations"
+      ]
+    },
+    {
+      "category": "Pet and Animal Services",
+      "businessTypes": [
+        "Dog Trainer",
+        "General Pet Services",
+        "Kennel/Boarding",
+        "Pet Groomer",
+        "Pet Supply Store",
+        "Veterinarian"
+      ]
+    },
+    {
+      "category": "Professional Services",
+      "businessTypes": [
+        "Accountant/CPA",
+        "Architect",
+        "Attorney/Law Firm",
+        "Consultant",
+        "Engineer",
+        "General Professional Services",
+        "Marketing/Advertising",
+        "Notary",
+        "Staffing/Employment Agency"
+      ]
+    },
+    {
+      "category": "Public and Community Services",
+      "businessTypes": [
+        "General Public Services",
+        "Government Office",
+        "Library",
+        "Postal/Shipping",
+        "Social Services",
+        "Utility Provider"
+      ]
+    },
+     {
+      "category": "Public Safety and Emergency Services",
+      "businessTypes": [
+        "Ambulance/EMS",
+        "Emergency Management",
+        "Hospital / Emergency Room",
+        "Fire Department",
+        "Police Department",
+        "General Public Safety",      
+         
+      ]
+    }
+    {
+      "category": "Real Estate and Property",
+      "businessTypes": [
+        "Apartment Leasing",
+        "General Real Estate",
+        "Property Management",
+        "Real Estate Office",
+        "Surveyor",
+        "Title Company"
+      ]
+    },
+    {
+      "category": "Religious and Nonprofit",
+      "businessTypes": [
+        "Charity/Foundation",
+        "Church",
+        "Community Organization",
+        "Fraternal Organization",
+        "General Nonprofit",
+        "Ministry"
+      ]
+    },
+    {
+      "category": "Retail",
+      "businessTypes": [
+        "Antiques",
+        "Clothing",
+        "Discount",
+        "Electronics",
+        "Florist",
+        "Furniture",
+        "General Retail",
+        "Gift Shop",
+        "Grocery",
+        "Hardware",
+        "Jewelry",
+        "Online",
+        "Pet",
+        "Sporting Goods",
+        "Thrift",
+        "Vape/Smoke Shop"
+      ]
+    },
+    {
+      "category": "Technology and Communications",
+      "businessTypes": [
+        "Computer Repair",
+        "Data/Cloud Services",
+        "General Technology",
+        "IT Services",
+        "Software/Web Services",
+        "Telecom Provider"
+      ]
+    },
+    {
+      "category": "Transportation and Logistics",
+      "businessTypes": [
+        "Courier",
+        "Delivery Service",
+        "General Transportation",
+        "Moving Company",
+        "Shuttle Service",
+        "Taxi/Rideshare",
+        "Trucking Company",
+        "Warehousing/Logistics"
+      ]
+    }
+  ]
+}
+=======
+{
+  "version": "1.0",
+  "description": "CPD Business Directory - Category to Business Type Reference Table",
+  "lastUpdated": "2026-05-17",
+  "categories": [
+    {
+      "category": "Agriculture and Environmental",
+      "businessTypes": [
+        "General Environmental",
+        "Landscaping",
+        "Nursery/Garden Center",
+        "Pest Control",
+        "Recycling",
+        "Tree Service",
+        "Waste Services"
+      ]
+    },
+    {
+      "category": "Arts, Entertainment, and Recreation",
+      "businessTypes": [
+        "Arcade/Gaming",
+        "Bowling Alley",
+        "Event Venue",
+        "Gallery",
+        "General Entertainment",
+        "Gym/Fitness Center",
+        "Park/Recreation Center",
+        "Sports Facility",
+        "Theater/Cinema"
+      ]
+    },
+    {
+      "category": "Automotive",
+      "businessTypes": [
+        "Auto Dealer",
+        "Auto Parts",
+        "Auto Repair/Mechanic",
+        "Body Shop/Collision",
+        "Car Wash",
+        "Gas Station",
+        "General Automotive",
+        "Oil Change/Quick Lube",
+        "Tire Shop",
+        "Towing Service"
+      ]
+    },
+    {
+      "category": "Beauty and Personal Care",
+      "businessTypes": [
+        "Barbershop",
+        "General Beauty Services",
+        "Hair Salon",
+        "Nail Salon",
+        "Spa/Massage",
+        "Tanning Salon",
+        "Tattoo/Piercing"
+      ]
+    },
+    {
+      "category": "Construction and Trades",
+      "businessTypes": [
+        "Carpenter/Woodwork",
+        "Electrician",
+        "Excavation",
+        "General Construction/Trades",
+        "General Contractor",
+        "Handyman",
+        "HVAC",
+        "Masonry",
+        "Painter",
+        "Paving/Concrete",
+        "Plumber",
+        "Roofing"
+      ]
+    },
+    {
+      "category": "Education and Child Services",
+      "businessTypes": [
+        "After-School Program",
+        "Dance/Music School",
+        "Daycare/Childcare",
+        "General Education",
+        "School",
+        "Training Center",
+        "Tutoring Center"
+      ]
+    },
+    {
+      "category": "Financial Services",
+      "businessTypes": [
+        "Bank",
+        "Check Cashing",
+        "Credit Union",
+        "Financial Advisor",
+        "General Financial Services",
+        "Insurance Agency",
+        "Mortgage/Lending",
+        "Tax Preparation"
+      ]
+    },
+    {
+      "category": "Food and Beverage",
+      "businessTypes": [
+        "Bakery",
+        "Banquet Hall",
+        "Bar/Tavern",
+        "Brewery/Distillery",
+        "Café/Coffee Shop",
+        "Caterer",
+        "Deli/Sub Shop",
+        "Fast Food",
+        "Food Truck",
+        "General Food Service",
+        "Ice Cream/Frozen Treats",
+        "Pizza Shop",
+        "Restaurant"
+      ]
+    },
+    {
+      "category": "Health and Medical",
+      "businessTypes": [
+        "Chiropractor",
+        "Clinic/Urgent Care",
+        "Dentist",
+        "General Medical",
+        "Home Health Agency",
+        "Hospital",
+        "Laboratory",
+        "Medical Equipment/Supply",
+        "Mental Health/Counseling",
+        "Optometrist/Vision",
+        "Pharmacy",
+        "Physical Therapy",
+        "Physician/Doctor"
+      ]
+    },
+    {
+      "category": "Lodging and Travel",
+      "businessTypes": [
+        "General Lodging",
+        "Hotel",
+        "Inn/Bed & Breakfast",
+        "Motel",
+        "Short-Term Rental",
+        "Travel Agency"
+      ]
+    },
+    {
+      "category": "Manufacturing and Industrial",
+      "businessTypes": [
+        "Fabricator/Welder",
+        "General Manufacturing",
+        "Industrial Supplier",
+        "Machine Shop",
+        "Printer/Print Shop",
+        "Warehouse/Storage",
+        "Wholesaler/Distributor"
+      ]
+    },
+    {
+      "category": "Other Services",
+      "businessTypes": [
+        "Cleaning Service",
+        "Funeral Home",
+        "Laundromat/Dry Cleaner",
+        "Locksmith",
+        "Other",
+        "Repair Service",
+        "Storage Facility",
+        "Tailor/Alterations"
+      ]
+    },
+    {
+      "category": "Pet and Animal Services",
+      "businessTypes": [
+        "Dog Trainer",
+        "General Pet Services",
+        "Kennel/Boarding",
+        "Pet Groomer",
+        "Pet Supply Store",
+        "Veterinarian"
+      ]
+    },
+    {
+      "category": "Professional Services",
+      "businessTypes": [
+        "Accountant/CPA",
+        "Architect",
+        "Attorney/Law Firm",
+        "Consultant",
+        "Engineer",
+        "General Professional Services",
+        "Marketing/Advertising",
+        "Notary",
+        "Staffing/Employment Agency"
+      ]
+    },
+    {
+      "category": "Public and Community Services",
+      "businessTypes": [
+        "General Public Services",
+        "Government Office",
+        "Library",
+        "Postal/Shipping",
+        "Social Services",
+        "Utility Provider"
+      ]
+    },
+     {
+      "category": "Public Safety and Emergency Services",
+      "businessTypes": [
+        "Ambulance/EMS",
+        "Emergency Management",
+        "Hospital / Emergency Room",
+        "Fire Department",
+        "Police Department",
+        "General Public Safety",      
+         
+      ]
+    }
+    {
+      "category": "Real Estate and Property",
+      "businessTypes": [
+        "Apartment Leasing",
+        "General Real Estate",
+        "Property Management",
+        "Real Estate Office",
+        "Surveyor",
+        "Title Company"
+      ]
+    },
+    {
+      "category": "Religious and Nonprofit",
+      "businessTypes": [
+        "Charity/Foundation",
+        "Church",
+        "Community Organization",
+        "Fraternal Organization",
+        "General Nonprofit",
+        "Ministry"
+      ]
+    },
+    {
+      "category": "Retail",
+      "businessTypes": [
+        "Antiques",
+        "Clothing",
+        "Discount",
+        "Electronics",
+        "Florist",
+        "Furniture",
+        "General Retail",
+        "Gift Shop",
+        "Grocery",
+        "Hardware",
+        "Jewelry",
+        "Online",
+        "Pet",
+        "Sporting Goods",
+        "Thrift",
+        "Vape/Smoke Shop"
+      ]
+    },
+    {
+      "category": "Technology and Communications",
+      "businessTypes": [
+        "Computer Repair",
+        "Data/Cloud Services",
+        "General Technology",
+        "IT Services",
+        "Software/Web Services",
+        "Telecom Provider"
+      ]
+    },
+    {
+      "category": "Transportation and Logistics",
+      "businessTypes": [
+        "Courier",
+        "Delivery Service",
+        "General Transportation",
+        "Moving Company",
+        "Shuttle Service",
+        "Taxi/Rideshare",
+        "Trucking Company",
+        "Warehousing/Logistics"
+      ]
+    }
+  ]
+}
+>>>>>>> origin/main

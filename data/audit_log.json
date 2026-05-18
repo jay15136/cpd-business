@@ -1,0 +1,18 @@
+<<<<<<< HEAD
+[
+  {
+    "timestamp": "2026-05-15T12:00:00Z",
+    "user": "test",
+    "action": "add",
+    "businessName": "Test"
+  }
+=======
+[
+  {
+    "timestamp": "2026-05-15T12:00:00Z",
+    "user": "test",
+    "action": "add",
+    "businessName": "Test"
+  }
+>>>>>>> origin/main
+]

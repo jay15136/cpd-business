@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Response Card - Coraopolis Borough Police Department</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ---- Response Card Page Styles ---- */
+    .card-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .card-controls select {
+      flex: 1;
+      min-width: 220px;
+    }
+    .card-controls .btn { white-space: nowrap; }
+
+    /* ---- Emergency Response Card ---- */
+    .response-card {
+      background: var(--cpd-dark);
+      border: 2px solid var(--cpd-accent);
+      border-radius: 10px;
+      overflow: hidden;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .rc-header {
+      background: var(--cpd-accent);
+      color: var(--cpd-black);
+      padding: 0.6rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .rc-header img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--cpd-black);
+      padding: 3px;
+    }
+    .rc-header-text {
+      flex: 1;
+    }
+    .rc-header-text .rc-dept {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.85;
+    }
+    .rc-header-text .rc-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .rc-badge {
+      background: var(--cpd-black);
+      color: var(--cpd-accent);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .rc-biz-bar {
+      background: var(--cpd-black);
+      padding: 0.75rem 1.2rem;
+      border-bottom: 1px solid var(--cpd-border);
+    }
+    .rc-biz-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--cpd-white);
+      margin-bottom: 0.15rem;
+    }
+    .rc-biz-meta {
+      font-size: 0.8rem;
+      color: var(--cpd-silver);
+    }
+    .rc-biz-meta span { margin-right: 1.2rem; }
+
+    .rc-body {
+      padding: 1rem 1.2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .rc-section {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--cpd-border);
+      border-radius: 6px;
+      padding: 0.7rem 0.85rem;
+    }
+    .rc-section.full-width {
+      grid-column: 1 / -1;
+    }
+    .rc-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--cpd-accent);
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--cpd-border);
+    }
+    .rc-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.2rem 0;
+      font-size: 0.82rem;
+    }
+    .rc-label {
+      color: var(--cpd-muted);
+      font-weight: 500;
+      min-width: 80px;
+    }
+    .rc-value {
+      color: var(--cpd-white);
+      text-align: right;
+      font-weight: 600;
+    }
+    .rc-value a {
+      color: var(--cpd-accent);
+      text-decoration: none;
+    }
+    .rc-value.warn {
+      color: #ff6b6b;
+      font-weight: 700;
+    }
+    .rc-value.safe {
+      color: #51cf66;
+    }
+
+    .rc-footer {
+      padding: 0.5rem 1.2rem;
+      border-top: 1px solid var(--cpd-border);
+      font-size: 0.68rem;
+      color: var(--cpd-muted);
+      text-align: center;
+    }
+
+    .rc-placeholder {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--cpd-muted);
+    }
+    .rc-placeholder-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .rc-placeholder p { font-size: 0.95rem; }
+
+    /* Print All Cards */
+    .all-cards-container {
+      display: none;
+    }
+    .all-cards-container .response-card {
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---- Print Styles ---- */
+    @media print {
+      @page {
+        size: letter;
+        margin: 0.4in;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .site-header, .card-controls, .toolbar, .toast-container, .rc-placeholder {
+        display: none !important;
+      }
+      .main-content {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .response-card {
+        border: 2px solid #333 !important;
+        border-radius: 6px !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        max-width: 100% !important;
+        margin: 0 !important;
+        background: #fff !important;
+      }
+      .rc-header {
+        background: #333 !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .rc-header img {
+        background: #fff !important;
+      }
+      .rc-badge {
+        background: #fff !important;
+        color: #333 !important;
+        border: 1px solid #333;
+      }
+      .rc-biz-bar {
+        background: #f0f0f0 !important;
+        border-bottom: 1px solid #ccc !important;
+      }
+      .rc-biz-name { color: #000 !important; }
+      .rc-biz-meta { color: #555 !important; }
+      .rc-body { padding: 0.6rem 0.8rem !important; gap: 0.6rem !important; }
+      .rc-section {
+        background: #fafafa !important;
+        border: 1px solid #ccc !important;
+      }
+      .rc-section-title {
+        color: #333 !important;
+        border-bottom-color: #ccc !important;
+      }
+      .rc-label { color: #555 !important; }
+      .rc-value { color: #000 !important; }
+      .rc-value.warn { color: #c00 !important; }
+      .rc-value.safe { color: #060 !important; }
+      .rc-value a { color: #000 !important; }
+      .rc-footer {
+        border-top-color: #ccc !important;
+        color: #777 !important;
+      }
+
+      /* Print All: show all cards, hide single */
+      .all-cards-container.print-all-active {
+        display: block !important;
+      }
+      .all-cards-container.print-all-active ~ #responseCard {
+        display: none !important;
+      }
+      .all-cards-container .response-card {
+        margin-bottom: 0.5in !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html"><img src="../data/images/pd.png" alt="Coraopolis Borough Police" class="logo"></a>
+    <div class="header-text">
+      <div class="dept-name">Coraopolis Borough Police Department</div>
+      <div class="page-title">Emergency Response Cards</div>
+    </div>
+    <nav>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="index.html" class="nav-link">Directory</a>
+      <a href="admin.html" class="nav-link">Admin</a>
+      <a href="response-card.html" class="nav-link active">Response Cards</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Controls -->
+    <div class="card-controls">
+      <select id="bizSelector" class="filter-select" style="flex:2;">
+        <option value="">-- Select a Business --</option>
+      </select>
+      <button class="btn btn-primary btn-sm" id="btnPrint" disabled>Print Card</button>
+      <button class="btn btn-secondary btn-sm" id="btnPrintAll">Print All Cards</button>
+    </div>
+
+    <!-- Single Response Card -->
+    <div id="responseCard">
+      <div class="rc-placeholder" id="rcPlaceholder">
+        <div class="rc-placeholder-icon">&#128196;</div>
+        <p>Select a business above to generate its Emergency Response Card.</p>
+      </div>
+    </div>
+
+    <!-- Hidden container for Print All -->
+    <div class="all-cards-container" id="allCardsContainer"></div>
+
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="../data/businesses.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      CPD.init('response-card'); // loads data + logs page view
+
+      const selector = document.getElementById('bizSelector');
+      const btnPrint = document.getElementById('btnPrint');
+      const btnPrintAll = document.getElementById('btnPrintAll');
+      const cardArea = document.getElementById('responseCard');
+      const placeholder = document.getElementById('rcPlaceholder');
+      const allContainer = document.getElementById('allCardsContainer');
+
+      // Populate selector
+      const data = CPD.getAllBusinesses();
+      data.sort((a, b) => (a.businessName || '').localeCompare(b.businessName || ''));
+      data.forEach(biz => {
+        const opt = document.createElement('option');
+        opt.value = biz.id;
+        opt.textContent = biz.businessName + (biz.address ? ' - ' + biz.address : '');
+        selector.appendChild(opt);
+      });
+
+      selector.addEventListener('change', () => {
+        const id = selector.value;
+        if (!id) {
+          cardArea.innerHTML = '';
+          cardArea.appendChild(placeholder);
+          placeholder.style.display = '';
+          btnPrint.disabled = true;
+          return;
+        }
+        const biz = data.find(b => b.id === id);
+        if (biz) {
+          cardArea.innerHTML = buildCard(biz);
+          btnPrint.disabled = false;
+        }
+      });
+
+      btnPrint.addEventListener('click', () => {
+        allContainer.classList.remove('print-all-active');
+        window.print();
+      });
+
+      btnPrintAll.addEventListener('click', () => {
+        // Build all cards into the hidden container
+        allContainer.innerHTML = data.map(b => buildCard(b)).join('');
+        allContainer.classList.add('print-all-active');
+        window.print();
+        // Clean up after print dialog
+        setTimeout(() => allContainer.classList.remove('print-all-active'), 1000);
+      });
+
+      // URL param support: ?id=biz-001
+      const params = new URLSearchParams(window.location.search);
+      const preselect = params.get('id');
+      if (preselect) {
+        selector.value = preselect;
+        selector.dispatchEvent(new Event('change'));
+      }
+
+      function v(biz, key) {
+        return biz[key] ? escHtml(biz[key]) : '<span style="opacity:0.35;">N/A</span>';
+      }
+      function escHtml(str) {
+        const d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+      }
+      function phoneLink(biz, key) {
+        const val = biz[key];
+        if (!val) return '<span style="opacity:0.35;">N/A</span>';
+        return '<a href="tel:' + escHtml(val) + '">' + escHtml(val) + '</a>';
+      }
+
+      function buildCard(biz) {
+        const hasAlarm = (biz.alarmPresent || '').toLowerCase() === 'yes';
+        const hasCameras = (biz.securityCameras || '').toLowerCase() === 'yes';
+        const hasHazmat = !!biz.hazardousMaterials;
+        const hasGuardDog = (biz.guardDog || '').toLowerCase() === 'yes';
+        const now = new Date().toLocaleDateString('en-US');
+
+        return `
+        <div class="response-card">
+          <div class="rc-header">
+            <img src="../data/images/pd.png" alt="CPD">
+            <div class="rc-header-text">
+              <div class="rc-dept">Coraopolis Borough Police Department</div>
+              <div class="rc-title">Emergency Response Card</div>
+            </div>
+            <div class="rc-badge">Law Enforcement Use Only</div>
+          </div>
+
+          <div class="rc-biz-bar">
+            <div class="rc-biz-name">${v(biz, 'businessName')}</div>
+            <div class="rc-biz-meta">
+              <span>${v(biz, 'address')}, ${v(biz, 'city')}, ${v(biz, 'state')} ${v(biz, 'zip')}</span>
+              <span>Type: ${v(biz, 'businessType')}</span>
+              <span>Hours: ${v(biz, 'hoursOfOperation')}</span>
+            </div>
+          </div>
+
+          <div class="rc-body">
+            <!-- Alarm & Security -->
+            <div class="rc-section">
+              <div class="rc-section-title">Alarm System</div>
+              <div class="rc-row">
+                <span class="rc-label">Alarm</span>
+                <span class="rc-value ${hasAlarm ? 'warn' : 'safe'}">${hasAlarm ? 'YES' : 'NO'}</span>
+              </div>
+              ${hasAlarm ? `
+              <div class="rc-row">
+                <span class="rc-label">Type</span>
+                <span class="rc-value">${v(biz, 'alarmType')}</span>
+              </div>
+              <div class="rc-row">
+                <span class="rc-label">Company</span>
+                <span class="rc-value">${v(biz, 'alarmCompany')}</span>
+              </div>
+              <div class="rc-row">
+                <span class="rc-label">Phone</span>
+                <span class="rc-value">${phoneLink(biz, 'alarmPhone')}</span>
+              </div>
+              ` : ''}
+            </div>
+
+            <!-- Cameras -->
+            <div class="rc-section">
+              <div class="rc-section-title">Security Cameras</div>
+              <div class="rc-row">
+                <span class="rc-label">Cameras</span>
+                <span class="rc-value ${hasCameras ? 'safe' : ''}">${hasCameras ? 'YES' : 'NO'}</span>
+              </div>
+              ${hasCameras ? `
+              <div class="rc-row">
+                <span class="rc-label">Coverage</span>
+                <span class="rc-value">${v(biz, 'cameraCoverage')}</span>
+              </div>
+              <div class="rc-row">
+                <span class="rc-label">Retention</span>
+                <span class="rc-value">${v(biz, 'videoRetention')}</span>
+              </div>
+              <div class="rc-row">
+                <span class="rc-label">Contact</span>
+                <span class="rc-value">${v(biz, 'videoContactName')}</span>
+              </div>
+              <div class="rc-row">
+                <span class="rc-label">Phone</span>
+                <span class="rc-value">${phoneLink(biz, 'videoContactPhone')}</span>
+              </div>
+              ` : ''}
+            </div>
+
+            <!-- Emergency Keyholders -->
+            <div class="rc-section full-width">
+              <div class="rc-section-title">Emergency Keyholders</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem;">
+                <div>
+                  <div class="rc-row"><span class="rc-label">KH #1</span></div>
+                  <div class="rc-row"><span class="rc-value">${v(biz, 'keyHolder1Name')}</span></div>
+                  <div class="rc-row"><span class="rc-value">${phoneLink(biz, 'keyHolder1Phone')}</span></div>
+                </div>
+                <div>
+                  <div class="rc-row"><span class="rc-label">KH #2</span></div>
+                  <div class="rc-row"><span class="rc-value">${v(biz, 'keyHolder2Name')}</span></div>
+                  <div class="rc-row"><span class="rc-value">${phoneLink(biz, 'keyHolder2Phone')}</span></div>
+                </div>
+                <div>
+                  <div class="rc-row"><span class="rc-label">KH #3</span></div>
+                  <div class="rc-row"><span class="rc-value">${v(biz, 'keyHolder3Name')}</span></div>
+                  <div class="rc-row"><span class="rc-value">${phoneLink(biz, 'keyHolder3Phone')}</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Access & Hazards -->
+            <div class="rc-section">
+              <div class="rc-section-title">Access Points</div>
+              <div class="rc-row">
+                <span class="rc-label">Doors/Access</span>
+                <span class="rc-value">${v(biz, 'rearDoorsAccess')}</span>
+              </div>
+              <div class="rc-row">
+                <span class="rc-label">Gates/Notes</span>
+                <span class="rc-value">${v(biz, 'gateAccessNotes')}</span>
+              </div>
+            </div>
+
+            <div class="rc-section">
+              <div class="rc-section-title">Hazards & Warnings</div>
+              <div class="rc-row">
+                <span class="rc-label">Hazmat</span>
+                <span class="rc-value ${hasHazmat ? 'warn' : 'safe'}">${hasHazmat ? escHtml(biz.hazardousMaterials) : 'None'}</span>
+              </div>
+              <div class="rc-row">
+                <span class="rc-label">Guard Dog</span>
+                <span class="rc-value ${hasGuardDog ? 'warn' : 'safe'}">${hasGuardDog ? 'YES' : 'No'}</span>
+              </div>
+              <div class="rc-row">
+                <span class="rc-label">Special</span>
+                <span class="rc-value">${v(biz, 'specialConcerns')}</span>
+              </div>
+            </div>
+
+            <!-- Owner / Manager -->
+            <div class="rc-section full-width">
+              <div class="rc-section-title">Owner / Manager Contact</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+                <div>
+                  <div class="rc-row">
+                    <span class="rc-label">Owner</span>
+                    <span class="rc-value">${v(biz, 'ownerName')}</span>
+                  </div>
+                  <div class="rc-row">
+                    <span class="rc-label">Phone</span>
+                    <span class="rc-value">${phoneLink(biz, 'ownerPhone')}</span>
+                  </div>
+                  <div class="rc-row">
+                    <span class="rc-label">Email</span>
+                    <span class="rc-value">${v(biz, 'ownerEmail')}</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="rc-row">
+                    <span class="rc-label">Manager</span>
+                    <span class="rc-value">${v(biz, 'onSiteManagerName')}</span>
+                  </div>
+                  <div class="rc-row">
+                    <span class="rc-label">Phone</span>
+                    <span class="rc-value">${phoneLink(biz, 'onSiteManagerPhone')}</span>
+                  </div>
+                  <div class="rc-row">
+                    <span class="rc-label">Email</span>
+                    <span class="rc-value">${v(biz, 'onSiteManagerEmail')}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rc-footer">
+            Business Phone: ${phoneLink(biz, 'phone')} &nbsp;|&nbsp;
+            Generated: ${now} &nbsp;|&nbsp;
+            Coraopolis Borough Police Department &bull; 1012 Fifth Avenue &bull; 412-264-4525
+          </div>
+        </div>`;
+      }
+    });
+  </script>
+</body>
+</html>

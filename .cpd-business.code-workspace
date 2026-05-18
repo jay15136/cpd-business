@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"claudeCode.useCtrlEnterToSend": true
+	},
+	"extensions": {
+		"recommendations": [
+			"pkief.material-icon-theme",
+			"beardedbear.beardedtheme"
+		]
+	}
+}

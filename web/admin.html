@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - CPD Business Directory</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html"><img src="../data/images/pd.png" alt="Coraopolis Borough Police" class="logo"></a>
+    <div class="header-text">
+      <div class="dept-name">Coraopolis Borough Police Department</div>
+      <div class="page-title">Business Directory &mdash; Admin Panel</div>
+    </div>
+    <nav>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="index.html" class="nav-link">Directory</a>
+      <a href="admin.html" class="nav-link active">Admin</a>
+      <a href="response-card.html" class="nav-link">Response Cards</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Session User Bar -->
+    <div class="session-user-bar" id="sessionUserBar">
+      <span class="session-user-label">Logged in as:</span>
+      <strong id="sessionUserDisplay">--</strong>
+      <button class="btn btn-secondary btn-sm" id="btnChangeUser" style="margin-left:0.5rem; padding:2px 10px; font-size:0.75rem;">Change</button>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="addEdit">Add / Edit</button>
+      <button class="tab-btn" data-tab="tracking">Tracking Log</button>
+      <button class="tab-btn" data-tab="auditLog" id="auditLogTabBtn" style="display:none;">Audit Log</button>
+      <button class="tab-btn" data-tab="dataManage">Data Management</button>
+    </div>
+
+    <!-- ======================== TAB: ADD / EDIT ======================== -->
+    <div class="tab-content active" id="tab-addEdit">
+
+      <!-- Entry Selector -->
+      <div class="toolbar">
+        <div class="toolbar-group">
+          <button class="btn btn-success" id="btnNewEntry">+ New Entry</button>
+          <span style="color:var(--cpd-silver); font-size:0.85rem;">or edit existing:</span>
+          <select id="editSelector" class="filter-select" style="min-width:250px;">
+            <option value="">-- Select a business to edit --</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Business Entry Form -->
+      <div class="form-container" id="entryForm">
+        <div class="form-title" id="formTitle">New Business Entry</div>
+        <input type="hidden" id="formId" value="">
+
+        <div class="form-grid">
+
+          <!-- ===== Business Information ===== -->
+          <div class="form-section-title">Business Information</div>
+
+          <div class="form-group">
+            <label>Business Name <span class="required">*</span></label>
+            <input type="text" id="fBusinessName" required>
+          </div>
+          <div class="form-group">
+            <label>Category <span class="required">*</span></label>
+            <select id="fCategory">
+              <option value="">-- Select Category --</option>
+              <!-- Populated by JS from categories.json -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Business Type <span class="required">*</span></label>
+            <select id="fBusinessType">
+              <option value="">-- Select Category first --</option>
+              <!-- Cascading options populated by JS -->
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Tags <span style="font-weight:normal; color:var(--cpd-silver);">(comma-separated keywords for search)</span></label>
+            <input type="text" id="fTags" placeholder="e.g. collision, body work, painting, mechanic">
+          </div>
+
+          <div class="form-group">
+            <label>Physical Address</label>
+            <input type="text" id="fAddress">
+          </div>
+          <div class="form-group">
+            <label>Suite / Unit / Floor</label>
+            <input type="text" id="fSuiteUnitFloor">
+          </div>
+          <div class="form-group full-width">
+            <label>Mailing Address (if different)</label>
+            <input type="text" id="fMailingAddress">
+          </div>
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" id="fCity" value="Coraopolis">
+          </div>
+          <div class="form-group">
+            <label>State</label>
+            <input type="text" id="fState" value="PA" maxlength="2">
+          </div>
+          <div class="form-group">
+            <label>ZIP</label>
+            <input type="text" id="fZip" value="15108" maxlength="10">
+          </div>
+          <div class="form-group">
+            <label>Main Business Phone</label>
+            <input type="tel" id="fPhone">
+          </div>
+          <div class="form-group">
+            <label>Main Business Email</label>
+            <input type="email" id="fEmail">
+          </div>
+          <div class="form-group">
+            <label>Website</label>
+            <input type="url" id="fWebsite" placeholder="https://">
+          </div>
+          <div class="form-group full-width">
+            <label>Normal Business Hours</label>
+            <input type="text" id="fHours" placeholder="e.g. Mon-Fri 9am-5pm, Sat 10am-2pm">
+          </div>
+
+          <!-- ===== Owner / Manager Information ===== -->
+          <div class="form-section-title">Owner / Manager Information</div>
+
+          <div class="form-group">
+            <label>Owner Name</label>
+            <input type="text" id="fOwnerName">
+          </div>
+          <div class="form-group">
+            <label>Owner Phone</label>
+            <input type="tel" id="fOwnerPhone">
+          </div>
+          <div class="form-group">
+            <label>Owner Email</label>
+            <input type="email" id="fOwnerEmail">
+          </div>
+          <div class="form-group"></div>
+
+          <div class="form-group">
+            <label>On-Site Manager Name</label>
+            <input type="text" id="fOnSiteManagerName">
+          </div>
+          <div class="form-group">
+            <label>On-Site Manager Phone</label>
+            <input type="tel" id="fOnSiteManagerPhone">
+          </div>
+          <div class="form-group">
+            <label>On-Site Manager Email</label>
+            <input type="email" id="fOnSiteManagerEmail">
+          </div>
+          <div class="form-group"></div>
+
+          <div class="form-group">
+            <label>Property Owner / Mgmt Co. (if leased)</label>
+            <input type="text" id="fPropertyOwner">
+          </div>
+          <div class="form-group">
+            <label>Property Management Phone</label>
+            <input type="tel" id="fPropertyMgmtPhone">
+          </div>
+
+          <!-- ===== Emergency Keyholders ===== -->
+          <div class="form-section-title">Emergency Keyholders</div>
+
+          <div class="form-group">
+            <label>Keyholder 1 - Name / Role</label>
+            <input type="text" id="fKey1Name">
+          </div>
+          <div class="form-group">
+            <label>Keyholder 1 - Phone</label>
+            <input type="tel" id="fKey1Phone">
+          </div>
+          <div class="form-group">
+            <label>Keyholder 2 - Name / Role</label>
+            <input type="text" id="fKey2Name">
+          </div>
+          <div class="form-group">
+            <label>Keyholder 2 - Phone</label>
+            <input type="tel" id="fKey2Phone">
+          </div>
+          <div class="form-group">
+            <label>Keyholder 3 - Name / Role</label>
+            <input type="text" id="fKey3Name">
+          </div>
+          <div class="form-group">
+            <label>Keyholder 3 - Phone</label>
+            <input type="tel" id="fKey3Phone">
+          </div>
+
+          <!-- ===== Alarm and Security Systems ===== -->
+          <div class="form-section-title">Alarm &amp; Security Systems</div>
+
+          <div class="form-group">
+            <label>Alarm System Present</label>
+            <select id="fAlarmPresent">
+              <option value="">-- Select --</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Alarm Type (Burglary, Fire, Panic)</label>
+            <input type="text" id="fAlarmType" placeholder="e.g. Burglary, Fire">
+          </div>
+          <div class="form-group">
+            <label>Alarm Company</label>
+            <input type="text" id="fAlarmCompany">
+          </div>
+          <div class="form-group">
+            <label>Alarm Company 24/7 Phone</label>
+            <input type="tel" id="fAlarmPhone">
+          </div>
+          <div class="form-group">
+            <label>Security Cameras Present</label>
+            <select id="fSecurityCameras">
+              <option value="">-- Select --</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Camera Coverage Areas</label>
+            <input type="text" id="fCameraCoverage" placeholder="e.g. Front entrance, parking lot">
+          </div>
+          <div class="form-group">
+            <label>Video Retention Period</label>
+            <input type="text" id="fVideoRetention" placeholder="e.g. 30 days">
+          </div>
+          <div class="form-group">
+            <label>Video Contact Person</label>
+            <input type="text" id="fVideoContactName">
+          </div>
+          <div class="form-group">
+            <label>Video Contact Phone</label>
+            <input type="tel" id="fVideoContactPhone">
+          </div>
+          <div class="form-group"></div>
+
+          <!-- ===== Site and Hazard Information ===== -->
+          <div class="form-section-title">Site &amp; Hazard Information</div>
+
+          <div class="form-group full-width">
+            <label>Rear Doors or Alternate Access Points</label>
+            <textarea id="fRearDoorsAccess" rows="2"></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label>Gate or Lot Access Notes</label>
+            <textarea id="fGateAccessNotes" rows="2"></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label>Hazardous Materials, Chemicals, or Fuel on Site</label>
+            <textarea id="fHazardousMaterials" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Guard Dog or Security Animal on Site</label>
+            <select id="fGuardDog">
+              <option value="">-- Select --</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Special Response Concerns</label>
+            <textarea id="fSpecialConcerns" rows="2"></textarea>
+          </div>
+
+          <!-- ===== Certification ===== -->
+          <div class="form-section-title">Certification</div>
+
+          <div class="form-group">
+            <label>Printed Name</label>
+            <input type="text" id="fCertName">
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="fCertTitle">
+          </div>
+          <div class="form-group">
+            <label>Date Signed</label>
+            <input type="date" id="fCertDate">
+          </div>
+          <div class="form-group"></div>
+
+          <!-- ===== Follow-Up & Notes ===== -->
+          <div class="form-section-title">Follow-Up &amp; Notes</div>
+
+          <div class="form-group">
+            <label>Follow-Up Needed</label>
+            <div class="toggle-wrapper">
+              <label class="toggle">
+                <input type="checkbox" id="fFollowUp">
+                <span class="slider"></span>
+              </label>
+              <span id="followUpLabel" style="font-size:0.85rem; color:var(--cpd-silver);">No</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="fStatus">
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+              <option value="closed">Closed</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Follow-Up Notes</label>
+            <textarea id="fFollowUpNotes" rows="2"></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label>General Notes</label>
+            <textarea id="fNotes" rows="3"></textarea>
+          </div>
+
+          <!-- Admin Entry By -->
+          <div class="form-section-title">Admin</div>
+          <div class="form-group">
+            <label>Entry By</label>
+            <input type="text" id="fEntryBy" value="" placeholder="Auto-filled from Windows login">
+          </div>
+          <div class="form-group"></div>
+        </div>
+
+        <!-- Admin Info (visible when editing) -->
+        <div class="admin-info" id="formAdminInfo" style="display:none;">
+          <span><span class="label">Created:</span> <span id="infoCreated">--</span></span>
+          <span><span class="label">Created By:</span> <span id="infoCreatedBy">--</span></span>
+          <span><span class="label">Last Updated:</span> <span id="infoUpdated">--</span></span>
+          <span><span class="label">Updated By:</span> <span id="infoUpdatedBy">--</span></span>
+        </div>
+
+        <!-- Form Buttons -->
+        <div style="margin-top:1.25rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-primary" id="btnSave">Save Entry</button>
+          <button class="btn btn-secondary" id="btnClear">Clear Form</button>
+          <button class="btn btn-danger" id="btnDelete" style="display:none;">Delete Entry</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== TAB: TRACKING LOG ======================== -->
+    <div class="tab-content" id="tab-tracking">
+      <div class="toolbar">
+        <div class="toolbar-group">
+          <input type="text" id="trackingSearch" class="search-input" style="max-width:300px;"
+                 placeholder="Search tracking log...">
+          <select id="trackingFilter" class="filter-select" style="min-width:160px;">
+            <option value="">All Entries</option>
+            <option value="followup">Needs Follow-Up</option>
+            <option value="recent">Updated Last 7 Days</option>
+            <option value="incomplete">Missing Key Info</option>
+          </select>
+        </div>
+        <div class="toolbar-group">
+          <button class="btn btn-secondary btn-sm" id="btnExportCSV">Export CSV</button>
+        </div>
+      </div>
+
+      <div class="admin-table-wrapper">
+        <table class="admin-table" id="trackingTable">
+          <thead>
+            <tr>
+              <th data-sort="businessName">Business <span class="sort-arrow"></span></th>
+              <th data-sort="category">Category <span class="sort-arrow"></span></th>
+              <th data-sort="businessType">Type <span class="sort-arrow"></span></th>
+              <th data-sort="phone">Phone <span class="sort-arrow"></span></th>
+              <th data-sort="status">Status <span class="sort-arrow"></span></th>
+              <th data-sort="followUpNeeded">Follow-Up <span class="sort-arrow"></span></th>
+              <th data-sort="createdDate">Created <span class="sort-arrow"></span></th>
+              <th data-sort="updatedDate">Updated <span class="sort-arrow"></span></th>
+              <th data-sort="updatedBy">Updated By <span class="sort-arrow"></span></th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="trackingBody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ======================== TAB: AUDIT LOG ======================== -->
+    <div class="tab-content" id="tab-auditLog">
+      <div class="toolbar">
+        <div class="toolbar-group">
+          <input type="text" id="auditSearch" class="search-input" style="max-width:250px;"
+                 placeholder="Search audit log...">
+          <select id="auditActionFilter" class="filter-select" style="min-width:140px;">
+            <option value="">All Actions</option>
+            <option value="login">Login</option>
+            <option value="logoff">Logoff</option>
+            <option value="page_view">Page View</option>
+            <option value="view">Record Viewed</option>
+            <option value="add">Added</option>
+            <option value="edit">Edited</option>
+            <option value="delete">Deleted</option>
+            <option value="import">Imported</option>
+          </select>
+          <select id="auditUserFilter" class="filter-select" style="min-width:140px;">
+            <option value="">All Users</option>
+            <!-- Populated by JS -->
+          </select>
+          <select id="auditDateFilter" class="filter-select" style="min-width:140px;">
+            <option value="">All Time</option>
+            <option value="today">Today</option>
+            <option value="7days">Last 7 Days</option>
+            <option value="30days">Last 30 Days</option>
+          </select>
+        </div>
+        <div class="toolbar-group">
+          <span id="auditCount" style="color:var(--cpd-silver); font-size:0.85rem;"></span>
+          <button class="btn btn-secondary btn-sm" id="btnExportAudit">Export Audit Log</button>
+          <button class="btn btn-danger btn-sm" id="btnClearAudit">Clear Log</button>
+        </div>
+      </div>
+
+      <div class="admin-table-wrapper" style="max-height:600px; overflow-y:auto;">
+        <table class="admin-table" id="auditTable">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>User</th>
+              <th>Action</th>
+              <th>Business</th>
+              <th>Details</th>
+              <th>IP Address</th>
+            </tr>
+          </thead>
+          <tbody id="auditTableBody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ======================== TAB: DATA MANAGEMENT ======================== -->
+    <div class="tab-content" id="tab-dataManage">
+
+      <!-- ---- Batch Import (CSV) ---- -->
+      <div class="form-container">
+        <div class="form-title">Batch Import (CSV)</div>
+        <p style="color:var(--cpd-silver); font-size:0.9rem; margin-bottom:0.75rem;">
+          Import multiple business records at once from a CSV file. Use the
+          <strong>Export CSV</strong> button on the Tracking Log tab to generate a template
+          with the correct column headers. Drag &amp; drop a file below, or click to browse.
+        </p>
+
+        <!-- Drop Zone -->
+        <div class="batch-drop-zone" id="batchDropZone">
+          <div class="batch-drop-icon">&#128196;</div>
+          <div class="batch-drop-label">Drag &amp; drop a CSV file here</div>
+          <div class="batch-drop-sub">or <button class="btn btn-secondary btn-sm" id="btnBrowseCSV">Browse Files</button></div>
+          <input type="file" id="batchFileInput" accept=".csv,.tsv,.txt" style="display:none;">
+        </div>
+
+        <!-- Preview (hidden until file loaded) -->
+        <div id="batchPreview" style="display:none;">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+            <div>
+              <span class="form-title" style="margin:0;">Preview</span>
+              <span id="batchSummary" style="color:var(--cpd-silver); font-size:0.85rem; margin-left:0.75rem;"></span>
+            </div>
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn btn-success btn-sm" id="btnBatchImport">Import All</button>
+              <button class="btn btn-secondary btn-sm" id="btnBatchClear">Clear</button>
+            </div>
+          </div>
+          <!-- Validation Messages -->
+          <div id="batchErrors" style="display:none;" class="batch-messages batch-errors"></div>
+          <div id="batchWarnings" style="display:none;" class="batch-messages batch-warnings"></div>
+          <!-- Preview Table -->
+          <div class="admin-table-wrapper" style="max-height:400px; overflow-y:auto;">
+            <table class="admin-table" id="batchTable">
+              <thead><tr id="batchTableHead"></tr></thead>
+              <tbody id="batchTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- Data Import / Export (existing) ---- -->
+      <div class="form-container">
+        <div class="form-title">Data Import / Export</div>
+        <p style="color:var(--cpd-silver); font-size:0.9rem; margin-bottom:1rem;">
+          The directory data is stored in your browser's local storage. Use these tools to
+          back up your data as a JSON file or restore from a previous backup.
+        </p>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+          <button class="btn btn-primary" id="btnExportJSON">Export Data (JSON)</button>
+          <button class="btn btn-secondary" id="btnImportJSON">Import Data (JSON)</button>
+          <input type="file" id="importFileInput" accept=".json" style="display:none;">
+        </div>
+
+        <div class="form-title" style="margin-top:1rem;">Load Seed Data</div>
+        <p style="color:var(--cpd-silver); font-size:0.9rem; margin-bottom:1rem;">
+          Load the initial businesses.json seed file from the data folder. This will
+          <strong style="color:var(--cpd-warning);">merge</strong> entries into your current data
+          (existing entries with matching IDs will be updated).
+        </p>
+        <button class="btn btn-warning" id="btnLoadSeed">Load Seed Data</button>
+
+        <div class="form-title" style="margin-top:1.5rem;">Reset All Data</div>
+        <p style="color:var(--cpd-silver); font-size:0.9rem; margin-bottom:1rem;">
+          Permanently remove all business entries from local storage.
+          <strong style="color:var(--cpd-danger);">This cannot be undone.</strong>
+          Export a backup first.
+        </p>
+        <button class="btn btn-danger" id="btnResetData">Reset All Data</button>
+      </div>
+
+      <div class="form-container">
+        <div class="form-title">Directory Statistics</div>
+        <div class="stats-strip" id="adminStats">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Confirm Dialog -->
+  <div class="confirm-overlay" id="confirmDialog">
+    <div class="confirm-box">
+      <h3 id="confirmTitle">Confirm</h3>
+      <p id="confirmMessage">Are you sure?</p>
+      <div class="btn-group">
+        <button class="btn btn-danger btn-sm" id="confirmYes">Yes</button>
+        <button class="btn btn-secondary btn-sm" id="confirmNo">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="../data/businesses.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      CPD.init('admin');
+    });
+  </script>
+</body>
+</html>

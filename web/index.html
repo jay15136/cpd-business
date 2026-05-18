@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Directory - Coraopolis Borough Police Department</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html"><img src="../data/images/pd.png" alt="Coraopolis Borough Police" class="logo"></a>
+    <div class="header-text">
+      <div class="dept-name">Coraopolis Borough Police Department</div>
+      <div class="page-title">Business Directory</div>
+    </div>
+    <nav>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="index.html" class="nav-link active">Directory</a>
+      <a href="admin.html" class="nav-link">Admin</a>
+      <a href="response-card.html" class="nav-link">Response Cards</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Stats Strip -->
+    <div class="stats-strip">
+      <div class="stat-card active-count">
+        <div class="stat-value" id="statTotal">0</div>
+        <div class="stat-label">Total Businesses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statCategories">0</div>
+        <div class="stat-label">Categories</div>
+      </div>
+      <div class="stat-card follow-up">
+        <div class="stat-value" id="statFollowUp">0</div>
+        <div class="stat-label">Need Follow-Up</div>
+      </div>
+    </div>
+
+    <!-- Search & Filter Bar -->
+    <div class="search-bar">
+      <div class="search-input-wrapper">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="searchInput" class="search-input"
+               placeholder="Search by name, address, owner, phone, category, or tags...">
+      </div>
+      <select id="categoryFilter" class="filter-select">
+        <option value="">All Categories</option>
+      </select>
+      <select id="followUpFilter" class="filter-select" style="min-width:150px;">
+        <option value="">All Entries</option>
+        <option value="yes">Needs Follow-Up</option>
+        <option value="no">No Follow-Up Needed</option>
+      </select>
+    </div>
+
+    <!-- Toolbar: Result count + View Toggle + All Contacts -->
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <span style="font-size:0.82rem; color:var(--cpd-silver);">
+          Showing <strong id="resultCount" style="color:var(--cpd-white);">0</strong> results
+        </span>
+      </div>
+      <div class="toolbar-group">
+        <button class="btn btn-primary btn-sm" id="btnAllContacts">All Contacts</button>
+        <div class="view-toggle" id="viewToggle">
+          <button class="view-toggle-btn active" data-view="tiles" title="Tile View">&#9638; Tiles</button>
+          <button class="view-toggle-btn" data-view="list" title="Detail List">&#9776; List</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Business Cards Grid (Tiles View) -->
+    <div class="business-grid" id="businessGrid">
+      <!-- Cards rendered by JS -->
+    </div>
+
+    <!-- Business Detail List View -->
+    <div class="business-list" id="businessList" style="display:none;">
+      <!-- Rows rendered by JS -->
+    </div>
+
+    <!-- No Results -->
+    <div class="no-results" id="noResults" style="display:none;">
+      <div class="no-results-icon">&#128270;</div>
+      <p>No businesses match your search.</p>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Business Details</h2>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="detail-grid" id="modalDetails">
+          <!-- Populated by JS -->
+        </div>
+        <div class="admin-info" id="modalAdminInfo">
+          <!-- Admin tracking info -->
+        </div>
+      </div>
+      <!-- Inline PDF Preview -->
+      <div class="modal-pdf-preview" id="modalPdfPreview" style="display:none;">
+        <iframe id="modalPdfFrame" class="modal-pdf-frame" src="about:blank"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-pdf" id="modalPdfToggle" style="display:none;">Original PDF</button>
+        <a href="#" class="btn-pdf btn-pdf-newtab" id="modalPdfNewTab" target="_blank" style="display:none;" title="Open in new tab">&#8599;</a>
+        <a href="admin.html" class="btn btn-primary btn-sm" id="modalEditLink">Edit in Admin</a>
+        <button class="btn btn-secondary btn-sm" id="modalCloseBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Contacts Overlay -->
+  <div class="modal-overlay" id="contactsOverlay">
+    <div class="modal" style="max-width:900px;">
+      <div class="modal-header">
+        <h2>All Business Contacts</h2>
+        <div class="toolbar-group" style="gap:0.75rem;">
+          <input type="text" id="contactsSearch" class="search-input" style="max-width:220px; padding:0.45rem 0.7rem; font-size:0.85rem;" placeholder="Filter contacts...">
+          <div class="view-toggle" id="contactsViewToggle">
+            <button class="view-toggle-btn active" data-view="tiles" title="Tile View">&#9638; Tiles</button>
+            <button class="view-toggle-btn" data-view="list" title="Detail List">&#9776; List</button>
+          </div>
+          <button class="modal-close" id="contactsClose">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body" style="max-height:70vh; overflow-y:auto;">
+        <div id="contactsContent">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="../data/businesses.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      CPD.init('directory');
+    });
+  </script>
+</body>
+</html>
+max-height:70vh; overflow-y:auto;">
+        <div id="contactsContent">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="../data/businesses.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      CPD.init('directory');
+    });
+  </script>
+</body>
+</html>

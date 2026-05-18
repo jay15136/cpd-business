@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Coraopolis Borough Police Department</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html"><img src="../data/images/pd.png" alt="Coraopolis Borough Police" class="logo"></a>
+    <div class="header-text">
+      <div class="dept-name">Coraopolis Borough Police Department</div>
+      <div class="page-title">Business Directory Dashboard</div>
+    </div>
+    <nav>
+      <a href="dashboard.html" class="nav-link active">Dashboard</a>
+      <a href="index.html" class="nav-link">Directory</a>
+      <a href="admin.html" class="nav-link">Admin</a>
+      <a href="response-card.html" class="nav-link">Response Cards</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Top Stats Row -->
+    <div class="dash-stats-row" id="dashStatsRow">
+      <div class="dash-stat-card accent">
+        <div class="dash-stat-icon">&#127970;</div>
+        <div class="dash-stat-body">
+          <div class="dash-stat-value" id="dashTotal">0</div>
+          <div class="dash-stat-label">Total Businesses</div>
+        </div>
+      </div>
+      <div class="dash-stat-card success">
+        <div class="dash-stat-icon">&#128194;</div>
+        <div class="dash-stat-body">
+          <div class="dash-stat-value" id="dashCategories">0</div>
+          <div class="dash-stat-label">Categories</div>
+        </div>
+      </div>
+      <div class="dash-stat-card warning">
+        <div class="dash-stat-icon">&#128276;</div>
+        <div class="dash-stat-body">
+          <div class="dash-stat-value" id="dashFollowUp">0</div>
+          <div class="dash-stat-label">Need Follow-Up</div>
+        </div>
+      </div>
+      <div class="dash-stat-card info">
+        <div class="dash-stat-icon">&#128197;</div>
+        <div class="dash-stat-body">
+          <div class="dash-stat-value" id="dashRecentCount">0</div>
+          <div class="dash-stat-label">Added This Month</div>
+        </div>
+      </div>
+      <div class="dash-stat-card danger">
+        <div class="dash-stat-icon">&#9888;</div>
+        <div class="dash-stat-body">
+          <div class="dash-stat-value" id="dashIncomplete">0</div>
+          <div class="dash-stat-label">Incomplete Records</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-Column Layout -->
+    <div class="dash-grid">
+
+      <!-- Left Column -->
+      <div class="dash-col">
+
+        <!-- Category Breakdown -->
+        <div class="dash-widget">
+          <div class="dash-widget-header">
+            <h3>Category Breakdown</h3>
+          </div>
+          <div class="dash-widget-body" id="dashCategoryBreakdown">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Follow-Up Reminders -->
+        <div class="dash-widget">
+          <div class="dash-widget-header">
+            <h3>Follow-Up Reminders</h3>
+            <span class="dash-badge" id="dashFollowUpBadge">0</span>
+          </div>
+          <div class="dash-widget-body" id="dashFollowUpList">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column -->
+      <div class="dash-col">
+
+        <!-- Recent Additions -->
+        <div class="dash-widget">
+          <div class="dash-widget-header">
+            <h3>Recent Additions</h3>
+          </div>
+          <div class="dash-widget-body" id="dashRecentAdditions">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Audit Activity Feed -->
+        <div class="dash-widget">
+          <div class="dash-widget-header">
+            <h3>Recent Activity</h3>
+          </div>
+          <div class="dash-widget-body dash-activity-scroll" id="dashAuditFeed">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Needs Attention (full width) -->
+    <div class="dash-widget">
+      <div class="dash-widget-header">
+        <h3>Businesses Needing Attention</h3>
+        <span class="dash-sub-label">Missing key fields (phone, owner, address, category)</span>
+      </div>
+      <div class="dash-widget-body">
+        <div class="table-wrapper">
+          <table class="admin-table" id="dashAttentionTable">
+            <thead>
+              <tr>
+                <th>Business Name</th>
+                <th>Category</th>
+                <th>Missing Fields</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="dashAttentionBody">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+        <div class="no-results" id="dashAttentionEmpty" style="display:none;">
+          <p>All records look complete.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="../data/businesses.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      CPD.init('dashboard');
+    });
+  </script>
+</body>
+</html>
