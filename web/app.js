@@ -740,12 +740,10 @@ const CPD = (() => {
     if (typeof CPD_PDF_MAP !== 'undefined' && CPD_PDF_MAP[businessName]) {
       return CPD_PDF_MAP[businessName];
     }
-    // 2. Auto-detect: try common path patterns by naming convention
-    //    Generates candidate paths the PDF might live at
+    // 2. Auto-detect: canonical intake-forms naming convention
     var baseName = businessName.trim();
     var candidates = [
-      '../data/intake-forms/' + baseName + '.pdf',
-      '../data/intake-forms/completed/' + baseName + '.pdf'
+      '../data/intake-forms/' + baseName + '.pdf'
     ];
     // Also try without common prefixes/suffixes
     var stripped = baseName
@@ -754,7 +752,6 @@ const CPD = (() => {
       .trim();
     if (stripped !== baseName) {
       candidates.push('../data/intake-forms/' + stripped + '.pdf');
-      candidates.push('../data/intake-forms/completed/' + stripped + '.pdf');
     }
     // Check if the PDF map has a case-insensitive or partial match
     if (typeof CPD_PDF_MAP !== 'undefined') {
